@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barber Maxx — Professional Barber Equipment</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --blue:       #4F86C6;
+  --blue-dark:  #3a6eaa;
+  --blue-light: #6b9fd4;
+  --black:      #0a0a0a;
+  --gray-900:   #111111;
+  --gray-800:   #1a1a1a;
+  --gray-700:   #262626;
+  --gray-600:   #333333;
+  --gray-400:   #666666;
+  --gray-300:   #808080;
+  --gray-200:   #b3b3b3;
+  --white:      #ffffff;
+  --font-d:     'Anton', Impact, sans-serif;
+  --font-b:     'Montserrat', 'Helvetica Neue', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: var(--font-b); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* ---- NAV ---- */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-700);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 68px;
+}
+.nav-logo img { height: 36px; filter: brightness(0) invert(1); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-200); text-decoration: none; transition: color 150ms; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta { background: var(--blue); color: var(--white); font-family: var(--font-b); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 24px; border-radius: 4px; text-decoration: none; transition: background 150ms; }
+.nav-cta:hover { background: var(--blue-dark); }
+
+/* ---- HERO ---- */
+.hero {
+  position: relative; min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(79,134,198,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-grid-lines {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image: linear-gradient(var(--white) 1px, transparent 1px), linear-gradient(90deg, var(--white) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.hero-content { padding: 80px 0 80px 80px; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(79,134,198,0.15); border: 1px solid rgba(79,134,198,0.35);
+  padding: 6px 16px; border-radius: 100px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-light);
+  margin-bottom: 28px;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); display: block; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero-title {
+  font-family: var(--font-d);
+  font-size: clamp(52px, 6vw, 88px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+.hero-title .accent { color: var(--blue); }
+.hero-sub {
+  font-size: 16px; font-weight: 500; line-height: 1.65;
+  color: var(--gray-300); max-width: 420px; margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-block; background: var(--blue); color: var(--white);
+  font-family: var(--font-b); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 16px 36px; border-radius: 4px; text-decoration: none;
+  transition: background 150ms, transform 150ms, box-shadow 150ms;
+  box-shadow: 0 4px 20px rgba(79,134,198,0.35);
+}
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(79,134,198,0.45); }
+.btn-primary:active { transform: scale(0.97); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; color: var(--gray-200); text-decoration: none;
+  transition: color 150ms;
+}
+.btn-ghost:hover { color: var(--white); }
+.btn-ghost svg { transition: transform 150ms; }
+.btn-ghost:hover svg { transform: translateX(3px); }
+.hero-stats { display: flex; gap: 36px; margin-top: 52px; padding-top: 36px; border-top: 1px solid var(--gray-700); }
+.hero-stat-num { font-family: var(--font-d); font-size: 32px; color: var(--white); line-height: 1; }
+.hero-stat-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-top: 4px; }
+.hero-image {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 80px 60px 40px;
+}
+.hero-image-main {
+  width: 100%; max-width: 480px;
+  border-radius: 8px; overflow: hidden;
+  position: relative;
+}
+.hero-image-main img { width: 100%; display: block; }
+.hero-image-badge {
+  position: absolute; bottom: 28px; left: -20px;
+  background: var(--gray-800); border: 1px solid var(--gray-600);
+  border-radius: 8px; padding: 16px 20px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+}
+.hero-image-badge-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); }
+.hero-image-badge-val { font-family: var(--font-d); font-size: 20px; color: var(--blue); margin-top: 2px; }
+.hero-image-glow {
+  position: absolute; inset: -40px;
+  background: radial-gradient(ellipse at center, rgba(79,134,198,0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ---- TRUST BAR ---- */
+.trust-bar {
+  background: var(--gray-900);
+  border-top: 1px solid var(--gray-700);
+  border-bottom: 1px solid var(--gray-700);
+  padding: 18px 80px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  flex-wrap: wrap;
+}
+.trust-item { display: flex; align-items: center; gap: 10px; }
+.trust-icon { color: var(--blue); }
+.trust-text { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-200); }
+.trust-divider { width: 1px; height: 28px; background: var(--gray-700); }
+
+/* ---- SECTION HEADER ---- */
+.section { padding: 96px 80px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+.section-title { font-family: var(--font-d); font-size: clamp(36px, 4vw, 56px); text-transform: uppercase; line-height: 1; letter-spacing: -0.01em; margin-bottom: 16px; }
+.section-sub { font-size: 15px; font-weight: 400; color: var(--gray-300); line-height: 1.65; max-width: 520px; }
+
+/* ---- LAMP EFFECT ---- */
+.lamp-section {
+  position: relative; overflow: hidden;
+  background: var(--black);
+  padding: 0 80px;
+}
+.lamp-stage {
+  position: relative; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 0 0;
+  overflow: hidden;
+}
+.lamp-beams {
+  position: relative; width: 100%; height: 320px;
+  display: flex; align-items: flex-start; justify-content: center;
+  transform: scaleY(1.2);
+  isolation: isolate;
+}
+/* left beam */
+.lamp-beam-l {
+  position: absolute;
+  right: 50%; top: 0;
+  width: 0; height: 224px;
+  background-image: conic-gradient(from 70deg at center top,
+    var(--blue) 0deg, transparent 30deg, transparent 360deg);
+  animation: lamp-expand 0.9s 0.3s cubic-bezier(0.4,0,0.2,1) both;
+}
+/* right beam */
+.lamp-beam-r {
+  position: absolute;
+  left: 50%; top: 0;
+  width: 0; height: 224px;
+  background-image: conic-gradient(from 290deg at center top,
+    transparent 0deg, transparent 330deg, var(--blue) 360deg);
+  animation: lamp-expand 0.9s 0.3s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes lamp-expand {
+  from { width: 15rem; opacity: 0.4; }
+  to   { width: 30rem; opacity: 1; }
+}
+/* fade masks on beams */
+.lamp-beam-l::before, .lamp-beam-l::after,
+.lamp-beam-r::before, .lamp-beam-r::after {
+  content: ''; position: absolute; background: var(--black);
+}
+.lamp-beam-l::before { bottom: 0; left: 0; width: 100%; height: 40%; mask-image: linear-gradient(to top, black, transparent); -webkit-mask-image: linear-gradient(to top, black, transparent); }
+.lamp-beam-l::after  { bottom: 0; left: 0; width: 40%; height: 100%; mask-image: linear-gradient(to right, black, transparent); -webkit-mask-image: linear-gradient(to right, black, transparent); }
+.lamp-beam-r::before { bottom: 0; right: 0; width: 100%; height: 40%; mask-image: linear-gradient(to top, black, transparent); -webkit-mask-image: linear-gradient(to top, black, transparent); }
+.lamp-beam-r::after  { bottom: 0; right: 0; width: 40%; height: 100%; mask-image: linear-gradient(to left, black, transparent); -webkit-mask-image: linear-gradient(to left, black, transparent); }
+/* base blur covers */
+.lamp-blur-base {
+  position: absolute; top: 50%; width: 100%; height: 12rem;
+  transform: translateY(3rem) scaleX(1.5);
+  background: var(--black); filter: blur(24px);
+}
+/* center glow orb */
+.lamp-glow-orb {
+  position: absolute; top: 50%; z-index: 50;
+  width: 28rem; height: 9rem; border-radius: 50%;
+  transform: translateY(-50%);
+  background: rgba(79,134,198,0.45); filter: blur(48px);
+  animation: lamp-orb 0.9s 0.3s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes lamp-orb {
+  from { opacity: 0; } to { opacity: 1; }
+}
+/* bright line */
+.lamp-line {
+  position: absolute; top: 50%; z-index: 50;
+  height: 2px; border-radius: 2px;
+  background: var(--blue-light);
+  transform: translateY(-7rem);
+  filter: blur(1px);
+  box-shadow: 0 0 12px var(--blue), 0 0 32px var(--blue);
+  animation: lamp-line 0.9s 0.3s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes lamp-line {
+  from { width: 15rem; opacity: 0.3; }
+  to   { width: 30rem; opacity: 1; }
+}
+/* inner bright orb */
+.lamp-glow-inner {
+  position: absolute; top: 50%; z-index: 30;
+  width: 16rem; height: 9rem; border-radius: 50%;
+  background: rgba(79,134,198,0.6); filter: blur(20px);
+  transform: translateY(-6rem);
+  animation: lamp-inner 0.9s 0.3s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes lamp-inner {
+  from { width: 8rem; opacity: 0; }
+  to   { width: 16rem; opacity: 1; }
+}
+.lamp-cover {
+  position: absolute; top: 50%; z-index: 40;
+  width: 100%; height: 11rem;
+  transform: translateY(-12.5rem);
+  background: var(--black);
+}
+.lamp-content {
+  position: relative; z-index: 50;
+  display: flex; flex-direction: column; align-items: center;
+  transform: translateY(-5rem);
+  text-align: center; padding: 0 24px;
+  animation: lamp-text 0.9s 0.4s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes lamp-text {
+  from { opacity: 0; transform: translateY(calc(-5rem + 24px)); }
+  to   { opacity: 1; transform: translateY(-5rem); }
+}
+@media (max-width: 1024px) {
+  .lamp-section { padding: 0 28px; }
+  .lamp-beam-l, .lamp-beam-r { animation: none; width: 15rem; }
+  .lamp-glow-orb, .lamp-line, .lamp-glow-inner { animation: none; }
+}
+
+/* ---- PRODUCTS GRID ---- */
+.products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 0; }
+.product-card {
+  background: var(--gray-800); position: relative; overflow: hidden;
+  cursor: pointer; transition: transform 200ms;
+  text-decoration: none; display: block;
+}
+.product-card:hover { transform: scale(1.02); z-index: 2; }
+.product-card:hover .product-overlay { opacity: 1; }
+.product-card:hover .product-cta { opacity: 1; transform: translateY(0); }
+.product-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+.product-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 50%, transparent 100%);
+  opacity: 0.7; transition: opacity 250ms;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 24px;
+}
+.product-name { font-family: var(--font-d); font-size: 20px; text-transform: uppercase; color: var(--white); line-height: 1.1; }
+.product-type { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-light); margin-top: 4px; }
+.product-cta {
+  margin-top: 12px; display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--blue); opacity: 0; transform: translateY(8px); transition: opacity 200ms, transform 200ms;
+}
+
+/* ---- FEATURED ---- */
+.featured { background: var(--gray-900); }
+.featured-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.featured-img-wrap { position: relative; }
+.featured-img { width: 100%; border-radius: 6px; display: block; }
+.featured-corner {
+  position: absolute; top: -20px; right: -20px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: var(--blue); display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family: var(--font-d); text-transform: uppercase; line-height: 1.1; text-align: center;
+  font-size: 13px; color: var(--white);
+}
+.featured-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 36px 0; }
+.spec-box {
+  background: var(--gray-800); border: 1px solid var(--gray-700);
+  border-radius: 6px; padding: 16px;
+}
+.spec-val { font-family: var(--font-d); font-size: 24px; color: var(--blue); }
+.spec-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-top: 4px; }
+
+/* ---- COLLECTIONS ---- */
+.collections-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 56px; }
+.collection-card {
+  background: var(--gray-800); border: 1px solid var(--gray-700);
+  border-radius: 6px; padding: 36px 24px; text-align: center; text-decoration: none;
+  transition: border-color 200ms, background 200ms, transform 200ms;
+  display: block;
+}
+.collection-card:hover { border-color: var(--blue); background: var(--gray-700); transform: translateY(-3px); }
+.coll-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(79,134,198,0.12); border: 1px solid rgba(79,134,198,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.coll-icon svg { width: 26px; height: 26px; color: var(--blue); }
+.coll-name { font-family: var(--font-d); font-size: 20px; text-transform: uppercase; color: var(--white); }
+.coll-desc { font-size: 12px; color: var(--gray-400); margin-top: 8px; line-height: 1.5; }
+.coll-link { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-top: 16px; display: block; }
+
+/* ---- WHY ---- */
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; }
+.why-card { background: var(--gray-800); padding: 48px 40px; }
+.why-num { font-family: var(--font-d); font-size: 64px; color: var(--gray-700); line-height: 1; margin-bottom: 20px; }
+.why-title { font-family: var(--font-d); font-size: 22px; text-transform: uppercase; color: var(--white); margin-bottom: 12px; }
+.why-text { font-size: 14px; color: var(--gray-300); line-height: 1.7; }
+
+/* ---- ABOUT ---- */
+.about { background: var(--blue); }
+.about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-logo { filter: brightness(0) invert(1); height: 48px; margin-bottom: 28px; }
+.about-title { font-family: var(--font-d); font-size: clamp(32px, 3.5vw, 52px); text-transform: uppercase; line-height: 1; color: var(--white); margin-bottom: 20px; }
+.about-text { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.8); }
+.btn-white {
+  display: inline-block; background: var(--white); color: var(--blue);
+  font-family: var(--font-b); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 16px 36px; border-radius: 4px; text-decoration: none; margin-top: 32px;
+  transition: background 150ms, transform 150ms;
+}
+.btn-white:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+.about-img { width: 100%; border-radius: 6px; }
+
+/* ---- CTA FINAL ---- */
+.cta-final {
+  text-align: center; padding: 120px 80px;
+  background: var(--gray-900);
+  border-top: 1px solid var(--gray-700);
+  position: relative; overflow: hidden;
+}
+.cta-final::before {
+  content: 'BARBER\AMAXX';
+  white-space: pre;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: var(--font-d); font-size: clamp(100px, 16vw, 240px);
+  text-transform: uppercase; color: var(--gray-800);
+  line-height: 0.85; pointer-events: none; z-index: 0; letter-spacing: -0.03em; text-align: center;
+}
+.cta-final > * { position: relative; z-index: 1; }
+.cta-title { font-family: var(--font-d); font-size: clamp(40px, 5vw, 72px); text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
+.cta-sub { font-size: 16px; color: var(--gray-300); margin-bottom: 44px; }
+
+/* ---- FOOTER ---- */
+footer {
+  background: var(--black); border-top: 1px solid var(--gray-700);
+  padding: 48px 80px; display: flex; align-items: center; justify-content: space-between; flex-wrap: gap; gap: 24px;
+}
+.footer-logo img { height: 28px; filter: brightness(0) invert(1); }
+.footer-links { display: flex; gap: 28px; list-style: none; }
+.footer-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); text-decoration: none; transition: color 150ms; }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-size: 12px; color: var(--gray-600); }
+.footer-social { display: flex; gap: 12px; }
+.footer-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--gray-600); display: flex; align-items: center; justify-content: center; color: var(--gray-400); text-decoration: none; transition: border-color 150ms, color 150ms; }
+.footer-social a:hover { border-color: var(--blue); color: var(--blue); }
+
+/* ---- SCROLL ANIMATIONS ---- */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  nav { padding: 0 28px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-content { padding: 60px 28px; }
+  .hero-image { padding: 20px 28px 60px; }
+  .trust-bar { padding: 16px 28px; gap: 16px; }
+  .trust-divider { display: none; }
+  .section { padding: 64px 28px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .featured-inner { grid-template-columns: 1fr; }
+  .collections-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: 1fr; }
+  .about-inner { grid-template-columns: 1fr; }
+  .cta-final { padding: 80px 28px; }
+  footer { padding: 40px 28px; flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://brmaxx.com/cdn/shop/files/MAXX.png?v=1776262015&width=600" alt="Barber Maxx">
+  </div>
+  <ul class="nav-links">
+    <li><a href="https://brmaxx.com/collections/all">Catalog</a></li>
+    <li><a href="https://brmaxx.com/pages/contact">Contact</a></li>
+  </ul>
+  <a href="https://brmaxx.com/" target="_blank" rel="noopener" class="nav-cta">Shop Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Professional Grade Equipment</div>
+    <h1 class="hero-title">
+      Built for<br>
+      <span class="accent">Barbers</span><br>
+      Who Win.
+    </h1>
+    <p class="hero-sub">VGR professional clippers, trimmers, and shavers — the tools that deliver precision cuts, zero compromise. Trusted by professionals who demand the best.</p>
+    <div class="hero-actions">
+      <a href="https://brmaxx.com/" target="_blank" rel="noopener" class="btn-primary">Shop the Collection</a>
+      <a href="#products" class="btn-ghost">
+        See All Products
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">8+</div>
+        <div class="hero-stat-label">VGR Models</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Collections</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">Pro</div>
+        <div class="hero-stat-label">Grade Quality</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-main">
+      <div class="hero-image-glow"></div>
+      <img src="https://brmaxx.com/cdn/shop/files/V-001_1.jpg?v=1776262295&width=800" alt="VGR V-001 Professional Hair Clipper" loading="eager">
+      <div class="hero-image-badge">
+        <div class="hero-image-badge-label">Flagship Model</div>
+        <div class="hero-image-badge-val">VGR V-001</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    </div>
+    <span class="trust-text">Professional Grade</span>
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="m9 12 2 2 4-4"/>
+      </svg>
+    </div>
+    <span class="trust-text">Stainless Steel Blades</span>
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+    </div>
+    <span class="trust-text">Long Battery Life</span>
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </div>
+    <span class="trust-text">All Hair Types</span>
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13" rx="2"/>
+        <path d="m16 8 5 3-5 3V8z"/>
+      </svg>
+    </div>
+    <span class="trust-text">Cordless Operation</span>
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+      </svg>
+    </div>
+    <span class="trust-text">Ergonomic Design</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="lamp-section" id="products">
+  <!-- Lamp effect header -->
+  <div class="lamp-stage">
+    <div class="lamp-beams">
+      <div class="lamp-beam-l"></div>
+      <div class="lamp-beam-r"></div>
+      <div class="lamp-blur-base"></div>
+      <div class="lamp-glow-orb"></div>
+      <div class="lamp-line"></div>
+      <div class="lamp-glow-inner"></div>
+      <div class="lamp-cover"></div>
+    </div>
+    <div class="lamp-content">
+      <div class="section-label" style="margin-bottom:12px;">All Models</div>
+      <h2 class="section-title" style="text-align:center;">The Full Lineup</h2>
+      <p class="section-sub" style="text-align:center;margin:0 auto;">From cordless clippers to precision shavers — every VGR tool engineered for barber performance.</p>
+    </div>
+  </div>
+
+  <div class="products-grid" style="margin-top:48px;">
+    <a href="https://brmaxx.com/products/vgr-v-001-professional-hair-clipper" target="_blank" rel="noopener" class="product-card">
+      <img class="product-img" src="https://brmaxx.com/cdn/shop/files/V-001_1.jpg?v=1776262295&width=600" alt="VGR V-001" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.background='#1a1a1a'">
+      <div class="product-overlay" style="opacity:0.85;">
+        <div class="product-name">VGR V-001</div>
+        <div class="product-type">Professional Hair Clipper</div>
+        <span class="product-cta">View Product →</span>
+      </div>
+    </a>
+
+
+    <a href="https://brmaxx.com/products/vgr-v-285-professional-hair-clipper" target="_blank" rel="noopener" class="product-card">
+      <img class="product-img" src="https://brmaxx.com/cdn/shop/files/V-258_1.jpg?v=1776259494&width=600" alt="VGR V-285" loading="lazy" onerror="this.style.display='none'">
+      <div class="product-overlay" style="opacity:0.85;">
+        <div class="product-name">VGR V-285</div>
+        <div class="product-type">Professional Hair Clipper</div>
+        <span class="product-cta">View Product →</span>
+      </div>
+    </a>
+    <a href="https://brmaxx.com/products/vgr-v-285t-professional-t-blade-hair-clipper" target="_blank" rel="noopener" class="product-card">
+      <img class="product-img" src="https://brmaxx.com/cdn/shop/files/V-285T_1.jpg?v=1776259582&width=600" alt="VGR V-285T" loading="lazy" onerror="this.style.display='none'">
+      <div class="product-overlay" style="opacity:0.85;">
+        <div class="product-name">VGR V-285T</div>
+        <div class="product-type">T-Blade Hair Clipper</div>
+        <span class="product-cta">View Product →</span>
+      </div>
+    </a>
+    <a href="https://brmaxx.com/products/vgr-v-377-professional-electric-shaver" target="_blank" rel="noopener" class="product-card">
+      <img class="product-img" src="https://brmaxx.com/cdn/shop/files/V-377-1.jpg?v=1776259650&width=600" alt="VGR V-377" loading="lazy" onerror="this.style.display='none'">
+      <div class="product-overlay" style="opacity:0.85;">
+        <div class="product-name">VGR V-377</div>
+        <div class="product-type">Professional Electric Shaver</div>
+        <span class="product-cta">View Product →</span>
+      </div>
+    </a>
+    <a href="https://brmaxx.com/products/vgr-v-600-professional-hair-clipper" target="_blank" rel="noopener" class="product-card">
+      <img class="product-img" src="https://brmaxx.com/cdn/shop/files/CopyofArtboard1.webp?v=1776363251&width=600" alt="VGR V-600" loading="lazy" onerror="this.style.display='none'">
+      <div class="product-overlay" style="opacity:0.85;">
+        <div class="product-name">VGR V-600</div>
+        <div class="product-type">Professional Hair Clipper</div>
+        <span class="product-cta">View Product →</span>
+      </div>
+    </a>
+    <a href="https://brmaxx.com/products/vgr-v-640-professional-hair-clipper" target="_blank" rel="noopener" class="product-card">
+      <img class="product-img" src="https://brmaxx.com/cdn/shop/files/V-640_1.jpg?v=1776259810&width=600" alt="VGR V-640" loading="lazy" onerror="this.style.display='none'">
+      <div class="product-overlay" style="opacity:0.85;">
+        <div class="product-name">VGR V-640</div>
+        <div class="product-type">Professional Hair Clipper</div>
+        <span class="product-cta">View Product →</span>
+      </div>
+    </a>
+  </div>
+  <div style="height:80px;"></div>
+</section>
+
+<!-- FEATURED PRODUCT -->
+<section class="section featured">
+  <div class="featured-inner">
+    <div class="featured-img-wrap reveal">
+      <img class="featured-img" src="https://brmaxx.com/cdn/shop/files/V-001_0573b8c5-8727-40f7-b6a0-cf734aade085.jpg?v=1776262314&width=900" alt="VGR V-001 Professional Hair Clipper">
+      <div class="featured-corner">All<br>Hair<br>Types</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="section-label">Destaque</div>
+      <h2 class="section-title">VGR V-001<br>Pro Clipper</h2>
+      <p class="section-sub">A professional-grade hair clipper designed for barbers and home use. Powerful motor, sharp stainless steel blades, and an ergonomic design engineered for precise, clean cuts.</p>
+      <div class="featured-specs">
+        <div class="spec-box">
+          <div class="spec-val">Cordless</div>
+          <div class="spec-label">Operation</div>
+        </div>
+        <div class="spec-box">
+          <div class="spec-val">Steel</div>
+          <div class="spec-label">Blade Type</div>
+        </div>
+        <div class="spec-box">
+          <div class="spec-val">Pro</div>
+          <div class="spec-label">Grade Motor</div>
+        </div>
+        <div class="spec-box">
+          <div class="spec-val">All</div>
+          <div class="spec-label">Hair Types</div>
+        </div>
+      </div>
+      <a href="https://brmaxx.com/products/vgr-v-001-professional-hair-clipper" target="_blank" rel="noopener" class="btn-primary">Shop VGR V-001</a>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section class="section" id="collections">
+  <div class="reveal">
+    <div class="section-label">Browse by Category</div>
+    <h2 class="section-title">Collections</h2>
+    <p class="section-sub">Find the right tool for every service — clippers, trimmers, shavers, and combos.</p>
+  </div>
+
+  <div class="collections-grid">
+    <a href="https://brmaxx.com/collections/all" target="_blank" rel="noopener" class="collection-card reveal reveal-delay-1">
+      <div class="coll-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2v20M18 2v20M6 12h12M3 7h3M3 17h3M18 7h3M18 17h3"/>
+        </svg>
+      </div>
+      <div class="coll-name">Clippers</div>
+      <div class="coll-desc">Professional hair clippers for all hair types. Cordless, powerful, precise.</div>
+      <span class="coll-link">Browse Clippers →</span>
+    </a>
+    <a href="https://brmaxx.com/collections/all" target="_blank" rel="noopener" class="collection-card reveal reveal-delay-2">
+      <div class="coll-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 2.5c0 1.5-1.5 7-1.5 7h-2S9.5 4 9.5 2.5a2.5 2.5 0 0 1 5 0zM12 9.5V21M8 21h8"/>
+        </svg>
+      </div>
+      <div class="coll-name">Trimmers</div>
+      <div class="coll-desc">Detail trimmers for edges, outlines, and beard definition.</div>
+      <span class="coll-link">Browse Trimmers →</span>
+    </a>
+    <a href="https://brmaxx.com/collections/all" target="_blank" rel="noopener" class="collection-card reveal reveal-delay-3">
+      <div class="coll-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 3v2M12 19v2M3 12h2M19 12h2"/>
+        </svg>
+      </div>
+      <div class="coll-name">Shavers</div>
+      <div class="coll-desc">Electric shavers for a smooth, clean shave — head to face.</div>
+      <span class="coll-link">Browse Shavers →</span>
+    </a>
+    <a href="https://brmaxx.com/collections/all" target="_blank" rel="noopener" class="collection-card reveal reveal-delay-4">
+      <div class="coll-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+      </div>
+      <div class="coll-name">Combos</div>
+      <div class="coll-desc">Complete 3-in-1 combo kits for the full professional setup.</div>
+      <span class="coll-link">Browse Combos →</span>
+    </a>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section" style="padding-top: 0;">
+  <div class="reveal">
+    <div class="section-label">Why Barber Maxx</div>
+    <h2 class="section-title">The Professional<br>Difference</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal reveal-delay-1">
+      <div class="why-num">01</div>
+      <div class="why-title">Precision Blades</div>
+      <div class="why-text">Stainless steel blades engineered for sharp, clean cuts that last. Zero pull, zero discomfort — only precision.</div>
+    </div>
+    <div class="why-card reveal reveal-delay-2">
+      <div class="why-num">02</div>
+      <div class="why-title">Cordless Freedom</div>
+      <div class="why-text">Long battery life for uninterrupted sessions. No tangled cords, no power interruptions — just pure performance.</div>
+    </div>
+    <div class="why-card reveal reveal-delay-3">
+      <div class="why-num">03</div>
+      <div class="why-title">Built to Last</div>
+      <div class="why-text">Professional-grade construction designed to withstand the demands of daily barbershop use. Built for the long game.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about">
+  <div class="about-inner">
+    <div class="reveal">
+      <img class="about-logo" src="https://brmaxx.com/cdn/shop/files/MAXX.png?v=1776262015&width=600" alt="Barber Maxx">
+      <h2 class="about-title">Specialized in Barber Products & Equipment</h2>
+      <p class="about-text">Barber Maxx exists to equip professionals with the tools they deserve. We carry VGR professional-grade clippers, trimmers, shavers, and combos — curated for barbers who won't settle for less.</p>
+      <a href="https://brmaxx.com/" target="_blank" rel="noopener" class="btn-white">Shop Now at brmaxx.com</a>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <img class="about-img" src="https://brmaxx.com/cdn/shop/files/V-640_1.jpg?v=1776259810&width=800" alt="VGR V-640 Professional Clipper">
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final">
+  <div class="reveal">
+    <div class="section-label">Ready to Upgrade?</div>
+    <h2 class="cta-title">Equip Your<br>Shop Today.</h2>
+    <p class="cta-sub">Professional tools, professional results. Shop the full VGR lineup at Barber Maxx.</p>
+    <a href="https://brmaxx.com/" target="_blank" rel="noopener" class="btn-primary" style="font-size:14px; padding:18px 48px;">Shop Now at brmaxx.com</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://brmaxx.com/cdn/shop/files/MAXX.png?v=1776262015&width=600" alt="Barber Maxx">
+  </div>
+  <ul class="footer-links">
+    <li><a href="https://brmaxx.com/collections/all" target="_blank" rel="noopener">Catalog</a></li>
+    <li><a href="https://brmaxx.com/pages/contact" target="_blank" rel="noopener">Contact</a></li>
+    <li><a href="https://brmaxx.com/policies/privacy-policy" target="_blank" rel="noopener">Privacy</a></li>
+  </ul>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/barbermaxxusa/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+    </a>
+  </div>
+  <div class="footer-copy">© 2026 Barber Maxx. All rights reserved.</div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Broken image fallback — replace with a styled placeholder
+document.querySelectorAll('img').forEach(img => {
+  function handleError() {
+    const w = img.naturalWidth || img.width || 400;
+    const h = img.naturalHeight || img.height || 400;
+    const label = img.alt || '';
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}' viewBox='0 0 ${w} ${h}'>
+      <rect width='${w}' height='${h}' fill='%23262626'/>
+      <text x='50%' y='44%' font-family='Anton,Impact,sans-serif' font-size='18' fill='%234F86C6' text-anchor='middle' dominant-baseline='middle' letter-spacing='2'>${encodeURIComponent(label.toUpperCase())}</text>
+      <text x='50%' y='58%' font-family='Montserrat,sans-serif' font-size='11' fill='%23666' text-anchor='middle' dominant-baseline='middle'>IMAGE UNAVAILABLE</text>
+    </svg>`;
+    img.src = 'data:image/svg+xml,' + svg;
+    img.onerror = null;
+  }
+  img.addEventListener('error', handleError);
+  if (img.complete && img.naturalWidth === 0) handleError();
+});
+</script>
+</body>
+</html>
